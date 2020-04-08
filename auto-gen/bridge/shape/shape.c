@@ -46,7 +46,12 @@ static struct shape_ops shape_ops = {
 
 void shape_init(struct shape *shape, struct color *color)
 {
+#ifdef __linux__
 	memset(shape, sizeof(*shape), 0);
+#else
+	memset(shape, 0, sizeof(*shape));
+#endif
+
 	shape->ops = &shape_ops;
 	shape->_color = color;
 }

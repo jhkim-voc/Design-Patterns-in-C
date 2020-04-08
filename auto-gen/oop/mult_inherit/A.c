@@ -55,6 +55,11 @@ static struct A_ops A_ops = {
 /** constructor(). */
 void A_init(struct A *A)
 {
+#ifdef __linux__
 	memset(A, sizeof(*A), 0);
+#else
+	memset(A, 0, sizeof(*A));
+#endif
+
 	A->ops = &A_ops;
 }

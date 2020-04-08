@@ -46,7 +46,12 @@ static struct pizza_ops pizza_ops = {
 /** constructor(). */
 void mushroom_topping_init(struct mushroom_topping *mushroom_topping, struct pizza *inner, int topping_price)
 {
+#ifdef __linux__
 	memset(mushroom_topping, sizeof(*mushroom_topping), 0);
+#else
+	memset(mushroom_topping, 0, sizeof(*mushroom_topping));
+#endif
+
 	toppings_decorator_init(&mushroom_topping->toppings_decorator, inner, topping_price);
 	CLASS_OPS_INIT(mushroom_topping->toppings_decorator.pizza.ops, pizza_ops);
 }

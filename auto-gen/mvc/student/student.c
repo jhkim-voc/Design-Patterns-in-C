@@ -27,7 +27,12 @@
 /** constructor(). */
 void student_init(struct student *student)
 {
+#ifdef __linux__
 	memset(student, sizeof(*student), 0);
+#else
+	memset(student, 0, sizeof(*student));
+#endif
+
 }
 
 void student_set_name(struct student *student, const char *name, int name_sz)

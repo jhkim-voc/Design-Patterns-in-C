@@ -39,7 +39,12 @@ static struct subject_ops subject_ops = {
 void real_subject_init(struct real_subject *real_subject)
 {
 	_MY_TRACE_STR("real_subject_init()\n");
+#ifdef __linux__
 	memset(real_subject, sizeof(*real_subject), 0);
+#else
+	memset(real_subject, 0, sizeof(*real_subject));
+#endif
+
 	subject_init(&real_subject->subject);
 	CLASS_OPS_INIT(real_subject->subject.ops, subject_ops);
 }

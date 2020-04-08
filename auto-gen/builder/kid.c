@@ -22,7 +22,12 @@
 
 void kid_init(struct kid *kid)
 {
+#ifdef __linux__
 	memset(kid, sizeof(*kid), 0);
+#else
+	memset(kid, 0, sizeof(*kid));
+#endif
+
 }
 
 

@@ -34,7 +34,12 @@ The classes and/or objects participating in this pattern are:
 void loan_init(struct loan *loan)
 {
 	_MY_TRACE_STR("loan_init()\n");
+#ifdef __linux__
 	memset(loan, sizeof(*loan), 0);
+#else
+	memset(loan, 0, sizeof(*loan));
+#endif
+
 }
 
 int loan_has_bad_loan(struct loan *loan, char *name)

@@ -68,7 +68,12 @@ static struct interface_ops interface_ops = {
 /** constructor(). */
 void wrapper_init(struct wrapper *wrapper, struct interface *inner, char *str)
 {
+#ifdef __linux__
 	memset(wrapper, sizeof(*wrapper), 0);
+#else
+	memset(wrapper, 0, sizeof(*wrapper));
+#endif
+
 	decorator_init(&wrapper->decorator, inner);
 	CLASS_OPS_INIT_SUPER(wrapper->decorator.ops, decorator_ops);
 	CLASS_OPS_INIT(wrapper->decorator.interface.ops, interface_ops);

@@ -25,7 +25,12 @@ static struct M_ops M_ops = {0
 /** constructor(). */
 void M_N_init(struct M_N *M_N)
 {
+#ifdef __linux__
 	memset(M_N, sizeof(*M_N), 0);
+#else
+	memset(M_N, 0, sizeof(*M_N));
+#endif
+
 	M_init(&M_N->M);
 	CLASS_OPS_INIT_SUPER(M_N->M.ops, M_ops);
 }

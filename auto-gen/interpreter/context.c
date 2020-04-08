@@ -25,7 +25,12 @@
 void context_init(struct context *context)
 {
 	_MY_TRACE_STR("context_init()\n");
+#ifdef __linux__
 	memset(context, sizeof(*context), 0);
+#else
+	memset(context, 0, sizeof(*context));
+#endif
+
 }
 
 int context_get_value(struct context *context, char *name)

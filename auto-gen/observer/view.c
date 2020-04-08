@@ -42,7 +42,12 @@ static struct observer_ops observer_ops = {
 /** constructor(). */
 void view_init(struct view *view)
 {
+#ifdef __linux__
 	memset(view, sizeof(*view), 0);
+#else
+	memset(view, 0, sizeof(*view));
+#endif
+
 	observer_init(&view->observer);
 	CLASS_OPS_INIT(view->observer.ops, observer_ops);
 }

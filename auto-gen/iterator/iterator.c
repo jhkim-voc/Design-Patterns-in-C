@@ -57,6 +57,11 @@ static struct iterator_ops iterator_ops = {
 void iterator_init(struct iterator *iterator)
 {
 	_MY_TRACE_STR("iterator_init()\n");
+#ifdef __linux__
 	memset(iterator, sizeof(*iterator), 0);
+#else
+	memset(iterator, 0, sizeof(*iterator));
+#endif
+
 	iterator->ops = &iterator_ops;
 }

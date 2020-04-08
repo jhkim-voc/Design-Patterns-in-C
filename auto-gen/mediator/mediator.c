@@ -44,7 +44,12 @@
 void mediator_init(struct mediator *mediator)
 {
 	_MY_TRACE_STR("mediator_init()\n");
+#ifdef __linux__
 	memset(mediator, sizeof(*mediator), 0);
+#else
+	memset(mediator, 0, sizeof(*mediator));
+#endif
+
 }
 
 void mediator_register_widget_one(struct mediator *mediator, struct widget_one *widget_one)

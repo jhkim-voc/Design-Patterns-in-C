@@ -19,7 +19,12 @@
 
 void bridge_init(struct bridge *bridge)
 {
+#ifdef __linux__
 	memset(bridge, sizeof(*bridge), 0);
+#else
+	memset(bridge, 0, sizeof(*bridge));
+#endif
+
 }
 
 void bridge_main_entry(void)

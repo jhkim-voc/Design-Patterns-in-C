@@ -36,7 +36,12 @@
 void character_factory_init(struct character_factory *character_factory)
 {
 	_MY_TRACE_STR("character_factory_init()\n");
+#ifdef __linux__
 	memset(character_factory, sizeof(*character_factory), 0);
+#else
+	memset(character_factory, 0, sizeof(*character_factory));
+#endif
+
 }
 
 struct character * character_factory_get_character(struct character_factory *fac, char c)

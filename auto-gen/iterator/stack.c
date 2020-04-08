@@ -65,6 +65,11 @@ static struct stack_ops stack_ops = {
 void stack_init(struct stack *stack)
 {
 	_MY_TRACE_STR("stack_init()\n");
+#ifdef __linux__
 	memset(stack, sizeof(*stack), 0);
+#else
+	memset(stack, 0, sizeof(*stack));
+#endif
+
 	stack->ops = &stack_ops;
 }

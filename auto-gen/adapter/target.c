@@ -29,7 +29,12 @@ static struct target_ops target_ops = {
 
 void target_init(struct target *target)
 {
+#ifdef __linux__
 	memset(target, sizeof(*target), 0);
+#else
+	memset(target, 0, sizeof(*target));
+#endif
+
 	target->ops = &target_ops;
 }
 

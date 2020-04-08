@@ -34,7 +34,12 @@ static struct component_ops component_ops = {
 
 void column_init(struct column *column, int val)
 {
+#ifdef __linux__
 	memset(column, sizeof(*column), 0);
+#else
+	memset(column, 0, sizeof(*column));
+#endif
+
 	composite_init(&column->composite, val);
 	CLASS_OPS_INIT_SUPER(column->composite.component.ops, component_ops);
 }

@@ -86,7 +86,12 @@ void stack_init(struct stack *stack, const char *stack_impl)
 {
 	struct stack_impl_array *array;
 	struct stack_impl_list *list;
+#ifdef __linux__
 	memset(stack, sizeof(*stack), 0);
+#else
+	memset(stack, 0, sizeof(*stack));
+#endif
+
 	stack->ops = &stack_ops;
 
 	stack->_impl = 0;

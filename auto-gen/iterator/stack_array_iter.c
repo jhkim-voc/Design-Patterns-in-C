@@ -74,7 +74,12 @@ static struct iterator_ops iterator_ops = {
 void stack_array_iter_init(struct stack_array_iter *stack_array_iter, struct stack_array *stack_array)
 {
 	_MY_TRACE_STR("stack_array_iter_init()\n");
+#ifdef __linux__
 	memset(stack_array_iter, sizeof(*stack_array_iter), 0);
+#else
+	memset(stack_array_iter, 0, sizeof(*stack_array_iter));
+#endif
+
 	iterator_init(&stack_array_iter->iterator);
 	CLASS_OPS_INIT(stack_array_iter->iterator.ops, iterator_ops);
 	stack_array_iter->_stack_array = stack_array;

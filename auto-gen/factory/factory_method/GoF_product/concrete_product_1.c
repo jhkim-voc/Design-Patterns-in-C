@@ -18,7 +18,12 @@ static struct product_ops product_ops = {
 
 void concrete_product_1_init(struct concrete_product_1 *concrete_product_1)
 {
+#ifdef __linux__
 	memset(concrete_product_1, sizeof(*concrete_product_1), 0);
+#else
+	memset(concrete_product_1, 0, sizeof(*concrete_product_1));
+#endif
+
 	product_init(&concrete_product_1->product);
 	CLASS_OPS_INIT(concrete_product_1->product.ops, product_ops);
 }

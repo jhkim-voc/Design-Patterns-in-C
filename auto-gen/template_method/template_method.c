@@ -33,7 +33,12 @@ static struct template_method_ops template_method_ops = {0
 void template_method_init(struct template_method *template_method)
 {
 	_MY_TRACE_STR("template_method_init()\n");
+#ifdef __linux__
 	memset(template_method, sizeof(*template_method), 0);
+#else
+	memset(template_method, 0, sizeof(*template_method));
+#endif
+
 	template_method->ops = &template_method_ops;
 }
 

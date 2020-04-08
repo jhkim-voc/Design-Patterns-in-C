@@ -36,6 +36,11 @@ static struct character_ops character_ops = {0
 void character_init(struct character *character)
 {
 	_MY_TRACE_STR("character_init()\n");
+#ifdef __linux__
 	memset(character, sizeof(*character), 0);
+#else
+	memset(character, 0, sizeof(*character));
+#endif
+
 	character->ops = &character_ops;
 }

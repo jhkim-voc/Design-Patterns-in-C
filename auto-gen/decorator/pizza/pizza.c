@@ -37,6 +37,11 @@ static struct pizza_ops pizza_ops = {0
 /** constructor(). */
 void pizza_init(struct pizza *pizza)
 {
+#ifdef __linux__
 	memset(pizza, sizeof(*pizza), 0);
+#else
+	memset(pizza, 0, sizeof(*pizza));
+#endif
+
 	pizza->ops = &pizza_ops;
 }

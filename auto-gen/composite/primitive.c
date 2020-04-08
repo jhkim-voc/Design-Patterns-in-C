@@ -32,7 +32,12 @@ static struct component_ops component_ops = {
 
 void primitive_init(struct primitive *primitive, int val)
 {
+#ifdef __linux__
 	memset(primitive, sizeof(*primitive), 0);
+#else
+	memset(primitive, 0, sizeof(*primitive));
+#endif
+
 	component_init(&primitive->component);
 	CLASS_OPS_INIT_SUPER(primitive->component.ops, component_ops);
 	primitive->value = val;

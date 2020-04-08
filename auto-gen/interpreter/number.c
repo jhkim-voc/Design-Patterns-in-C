@@ -46,7 +46,12 @@ static struct operand_ops operand_ops = {
 void number_init(struct number *number, int val)
 {
 	_MY_TRACE_STR("number_init()\n");
+#ifdef __linux__
 	memset(number, sizeof(*number), 0);
+#else
+	memset(number, 0, sizeof(*number));
+#endif
+
 	operand_init(&number->operand);
 	CLASS_OPS_INIT(number->operand.ops, operand_ops);
 	number->_val = val;

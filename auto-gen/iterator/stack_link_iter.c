@@ -70,7 +70,12 @@ static struct iterator_ops iterator_ops = {
 void stack_link_iter_init(struct stack_link_iter *stack_link_iter, struct stack_link *stack_link)
 {
 	_MY_TRACE_STR("stack_link_iter_init()\n");
+#ifdef __linux__
 	memset(stack_link_iter, sizeof(*stack_link_iter), 0);
+#else
+	memset(stack_link_iter, 0, sizeof(*stack_link_iter));
+#endif
+
 	iterator_init(&stack_link_iter->iterator);
 	CLASS_OPS_INIT(stack_link_iter->iterator.ops, iterator_ops);
 	stack_link_iter->_stack_link = stack_link;

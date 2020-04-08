@@ -43,6 +43,11 @@ static struct P_ops P_ops = {
 /** constructor(). */
 void P_init(struct P *P)
 {
+#ifdef __linux__
 	memset(P, sizeof(*P), 0);
+#else
+	memset(P, 0, sizeof(*P));
+#endif
+
 	P->ops = &P_ops;
 }

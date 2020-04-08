@@ -29,6 +29,11 @@ static struct color_ops color_ops = {
 
 void color_init(struct color *color)
 {
+#ifdef __linux__
 	memset(color, sizeof(*color), 0);
+#else
+	memset(color, 0, sizeof(*color));
+#endif
+
 	color->ops = &color_ops;
 }

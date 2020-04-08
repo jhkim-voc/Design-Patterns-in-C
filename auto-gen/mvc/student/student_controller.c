@@ -27,7 +27,12 @@
 /** constructor(). */
 void student_controller_init(struct student_controller *student_controller, struct student *model, struct student_view *view)
 {
+#ifdef __linux__
 	memset(student_controller, sizeof(*student_controller), 0);
+#else
+	memset(student_controller, 0, sizeof(*student_controller));
+#endif
+
 	student_controller->_model = model;
 	student_controller->_view = view;
 }

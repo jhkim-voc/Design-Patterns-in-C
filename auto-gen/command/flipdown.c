@@ -42,7 +42,12 @@ static struct command_ops command_ops = {
 void flipdown_init(struct flipdown *flipdown, struct light *light, int val)
 {
 	_MY_TRACE_STR("flipdown_init()\n");
+#ifdef __linux__
 	memset(flipdown, sizeof(*flipdown), 0);
+#else
+	memset(flipdown, 0, sizeof(*flipdown));
+#endif
+
 	command_init(&flipdown->command);
 	CLASS_OPS_INIT(flipdown->command.ops, command_ops);
 	flipdown->_light = light;

@@ -22,6 +22,11 @@
 
 void domain_class_init(struct domain_class *domain_class)
 {
+#ifdef __linux__
 	memset(domain_class, sizeof(*domain_class), 0);
+#else
+	memset(domain_class, 0, sizeof(*domain_class));
+#endif
+
 }
 

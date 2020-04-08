@@ -78,6 +78,11 @@ static struct stack_impl_ops stack_impl_ops = {
 
 void stack_impl_init(struct stack_impl *stack_impl)
 {
+#ifdef __linux__
 	memset(stack_impl, sizeof(*stack_impl), 0);
+#else
+	memset(stack_impl, 0, sizeof(*stack_impl));
+#endif
+
 	stack_impl->ops = &stack_impl_ops;
 }

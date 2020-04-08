@@ -32,7 +32,12 @@ static struct subject_ops subject_ops = {0
 /** constructor(). */
 void database_init(struct database *database)
 {
+#ifdef __linux__
 	memset(database, sizeof(*database), 0);
+#else
+	memset(database, 0, sizeof(*database));
+#endif
+
 	subject_init(&database->subject);
 	CLASS_OPS_INIT_SUPER(database->subject.ops, subject_ops);
 }

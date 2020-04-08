@@ -32,7 +32,12 @@
 /** constructor(). */
 void socket_impl_init(struct socket_impl *socket_impl)
 {
+#ifdef __linux__
 	memset(socket_impl, sizeof(*socket_impl), 0);
+#else
+	memset(socket_impl, 0, sizeof(*socket_impl));
+#endif
+
 }
 
 int socket_impl_network_byte_order(struct socket_impl *socket_impl)

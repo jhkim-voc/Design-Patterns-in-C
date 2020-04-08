@@ -67,7 +67,12 @@ static struct state_ops state_ops = {
 void state_on_init(struct state_on *state_on)
 {
 	_MY_TRACE_STR("state_on_init(1)\n");
+#ifdef __linux__
 	memset(state_on, sizeof(*state_on), 0);
+#else
+	memset(state_on, 0, sizeof(*state_on));
+#endif
+
 	state_init(&state_on->state);
 	CLASS_OPS_INIT_SUPER(state_on->state.ops, state_ops);
 }

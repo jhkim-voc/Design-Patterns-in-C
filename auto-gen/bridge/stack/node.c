@@ -19,7 +19,12 @@
 
 void node_init(struct node *node, int val)
 {
+#ifdef __linux__
 	memset(node, sizeof(*node), 0);
+#else
+	memset(node, 0, sizeof(*node));
+#endif
+
 	node->val = val;
 	node->prev = node;
 	node->next = node;

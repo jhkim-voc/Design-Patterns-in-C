@@ -49,7 +49,12 @@ static struct shape_ops shape_ops = {
 
 void shape_circle_init(struct shape_circle *shape_circle, struct color *color)
 {
+#ifdef __linux__
 	memset(shape_circle, sizeof(*shape_circle), 0);
+#else
+	memset(shape_circle, 0, sizeof(*shape_circle));
+#endif
+
 	shape_init(&shape_circle->shape, color);
 	CLASS_OPS_INIT_SUPER(shape_circle->shape.ops, shape_ops);
 }

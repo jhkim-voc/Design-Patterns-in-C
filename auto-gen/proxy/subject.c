@@ -31,6 +31,11 @@ static struct subject_ops subject_ops = {0
 void subject_init(struct subject *subject)
 {
 	_MY_TRACE_STR("subject_init()\n");
+#ifdef __linux__
 	memset(subject, sizeof(*subject), 0);
+#else
+	memset(subject, 0, sizeof(*subject));
+#endif
+
 	subject->ops = &subject_ops;
 }

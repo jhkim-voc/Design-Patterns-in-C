@@ -77,7 +77,12 @@ static struct stack_ops stack_ops = {
 void stack_link_init(struct stack_link *stack_link)
 {
 	_MY_TRACE_STR("stack_link_init()\n");
+#ifdef __linux__
 	memset(stack_link, sizeof(*stack_link), 0);
+#else
+	memset(stack_link, 0, sizeof(*stack_link));
+#endif
+
 	stack_init(&stack_link->stack);
 	CLASS_OPS_INIT_SUPER(stack_link->stack.ops, stack_ops);
 }

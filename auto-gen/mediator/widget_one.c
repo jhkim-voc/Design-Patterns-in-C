@@ -60,7 +60,12 @@ static struct participant_ops participant_ops = {
 void widget_one_init(struct widget_one *widget_one, struct mediator *mediator)
 {
 	_MY_TRACE_STR("widget_one_init()\n");
+#ifdef __linux__
 	memset(widget_one, sizeof(*widget_one), 0);
+#else
+	memset(widget_one, 0, sizeof(*widget_one));
+#endif
+
 	participant_init(&widget_one->participant);
 	CLASS_OPS_INIT(widget_one->participant.ops, participant_ops);
 	widget_one->_mediator = mediator;

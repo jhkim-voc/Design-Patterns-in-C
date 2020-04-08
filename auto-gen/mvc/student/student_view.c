@@ -27,7 +27,12 @@
 /** constructor(). */
 void student_view_init(struct student_view *student_view)
 {
+#ifdef __linux__
 	memset(student_view, sizeof(*student_view), 0);
+#else
+	memset(student_view, 0, sizeof(*student_view));
+#endif
+
 }
 
 void student_view_show_me(struct student_view *student_view, struct student *stu)

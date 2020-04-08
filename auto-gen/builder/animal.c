@@ -29,7 +29,12 @@ static struct animal_ops animal_ops = {
 
 void animal_init(struct animal *animal)
 {
+#ifdef __linux__
 	memset(animal, sizeof(*animal), 0);
+#else
+	memset(animal, 0, sizeof(*animal));
+#endif
+
 	animal->ops = &animal_ops;
 }
 

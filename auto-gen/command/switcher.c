@@ -30,7 +30,12 @@
 void switcher_init(struct switcher *switcher)
 {
 	_MY_TRACE_STR("switcher_init()\n");
+#ifdef __linux__
 	memset(switcher, sizeof(*switcher), 0);
+#else
+	memset(switcher, 0, sizeof(*switcher));
+#endif
+
 }
 
 void switcher_append(struct switcher *switcher, struct command *cmd)

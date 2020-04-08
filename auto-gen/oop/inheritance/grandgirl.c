@@ -73,7 +73,12 @@ static struct parent_ops parent_ops = {
 
 void grandgirl_init(struct grandgirl *grandgirl)
 {
+#ifdef __linux__
 	memset(grandgirl, sizeof(*grandgirl), 0);
+#else
+	memset(grandgirl, 0, sizeof(*grandgirl));
+#endif
+
 	child_init(&grandgirl->child);
 	CLASS_OPS_INIT_SUPER_WITH_FIRST_STATIC(grandgirl->child.parent.ops, parent_ops, static_pub_data3);
 }

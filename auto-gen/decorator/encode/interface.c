@@ -25,6 +25,11 @@ static struct interface_ops interface_ops = {0
 /** constructor(). */
 void interface_init(struct interface *interface)
 {
+#ifdef __linux__
 	memset(interface, sizeof(*interface), 0);
+#else
+	memset(interface, 0, sizeof(*interface));
+#endif
+
 	interface->ops = &interface_ops;
 }

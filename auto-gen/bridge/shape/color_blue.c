@@ -34,7 +34,12 @@ static struct color_ops color_ops = {
 void color_blue_init(struct color_blue *color_blue)
 {
 	_MY_TRACE_STR("color_blue_init()\n");
+#ifdef __linux__
 	memset(color_blue, sizeof(*color_blue), 0);
+#else
+	memset(color_blue, 0, sizeof(*color_blue));
+#endif
+
 	color_init(&color_blue->color);
 	CLASS_OPS_INIT(color_blue->color.ops, color_ops);
 }

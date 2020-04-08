@@ -33,7 +33,12 @@
 void machine_init(struct machine *machine, struct state *state)
 {
 	_MY_TRACE_STR("machine_init(1)\n");
+#ifdef __linux__
 	memset(machine, sizeof(*machine), 0);
+#else
+	memset(machine, 0, sizeof(*machine));
+#endif
+
 	machine->_state = state;
 }
 

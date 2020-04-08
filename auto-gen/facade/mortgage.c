@@ -33,7 +33,12 @@ The classes and/or objects participating in this pattern are:
 void mortgage_init(struct mortgage *m)
 {
 	_MY_TRACE_STR("mortgage_init()\n");
+#ifdef __linux__
 	memset(m, sizeof(*m), 0);
+#else
+	memset(m, 0, sizeof(*m));
+#endif
+
 
 	m->_bank = malloc(sizeof(*m->_bank));
 	bank_init(m->_bank);

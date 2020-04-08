@@ -44,7 +44,12 @@ static struct character_ops character_ops = {
 void character_c_init(struct character_c *character_c)
 {
 	_MY_TRACE_STR("character_c_init()\n");
+#ifdef __linux__
 	memset(character_c, sizeof(*character_c), 0);
+#else
+	memset(character_c, 0, sizeof(*character_c));
+#endif
+
 	character_init(&character_c->character);
 	CLASS_OPS_INIT(character_c->character.ops, character_ops);
 }

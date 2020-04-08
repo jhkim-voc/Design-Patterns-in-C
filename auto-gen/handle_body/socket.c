@@ -32,7 +32,12 @@
 /** constructor(). */
 void socket_init(struct socket *socket)
 {
+#ifdef __linux__
 	memset(socket, sizeof(*socket), 0);
+#else
+	memset(socket, 0, sizeof(*socket));
+#endif
+
 }
 
 int socket_open(struct socket *socket, int type, int protocol)

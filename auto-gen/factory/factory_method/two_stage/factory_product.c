@@ -32,7 +32,12 @@ static struct factory_ops factory_ops = {
 
 void factory_product_init(struct factory_product *factory_product, struct serializer *s, struct file_access_handler *f)
 {
+#ifdef __linux__
 	memset(factory_product, sizeof(*factory_product), 0);
+#else
+	memset(factory_product, 0, sizeof(*factory_product));
+#endif
+
 	factory_init(&factory_product->factory);
 	CLASS_OPS_INIT(factory_product->factory.ops, factory_ops);
 	factory_product->serializer = s;

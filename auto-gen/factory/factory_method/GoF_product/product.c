@@ -16,7 +16,12 @@ static struct product_ops product_ops = {
 
 void product_init(struct product *product)
 {
+#ifdef __linux__
 	memset(product, sizeof(*product), 0);
+#else
+	memset(product, 0, sizeof(*product));
+#endif
+
 	product->ops = &product_ops;
 }
 

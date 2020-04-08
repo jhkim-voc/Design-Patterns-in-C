@@ -22,7 +22,12 @@
 
 void adaptee_init(struct adaptee *adaptee)
 {
+#ifdef __linux__
 	memset(adaptee, sizeof(*adaptee), 0);
+#else
+	memset(adaptee, 0, sizeof(*adaptee));
+#endif
+
 }
 
 

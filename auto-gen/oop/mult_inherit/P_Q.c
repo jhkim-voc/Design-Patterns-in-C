@@ -65,7 +65,12 @@ static struct P_ops P_ops = {
 /** constructor(). */
 void P_Q_init(struct P_Q *P_Q)
 {
+#ifdef __linux__
 	memset(P_Q, sizeof(*P_Q), 0);
+#else
+	memset(P_Q, 0, sizeof(*P_Q));
+#endif
+
 	P_init(&P_Q->P);
 	CLASS_OPS_INIT_SUPER(P_Q->P.ops, P_ops);
 }

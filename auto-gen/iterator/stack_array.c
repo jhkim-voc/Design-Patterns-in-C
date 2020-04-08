@@ -84,7 +84,12 @@ static struct stack_ops stack_ops = {
 void stack_array_init(struct stack_array *stack_array)
 {
 	_MY_TRACE_STR("stack_array_init()\n");
+#ifdef __linux__
 	memset(stack_array, sizeof(*stack_array), 0);
+#else
+	memset(stack_array, 0, sizeof(*stack_array));
+#endif
+
 	stack_init(&stack_array->stack);
 	CLASS_OPS_INIT_SUPER(stack_array->stack.ops, stack_ops);
 }

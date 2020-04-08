@@ -31,7 +31,12 @@ static struct animal_ops animal_ops = {
 
 void kitten_init(struct kitten *kitten)
 {
+#ifdef __linux__
 	memset(kitten, sizeof(*kitten), 0);
+#else
+	memset(kitten, 0, sizeof(*kitten));
+#endif
+
 	animal_init(&kitten->animal);
 	CLASS_OPS_INIT(kitten->animal.ops, animal_ops);
 }

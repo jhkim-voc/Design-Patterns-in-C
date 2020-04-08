@@ -38,6 +38,11 @@ static struct observer_ops observer_ops = {
 /** constructor(). */
 void observer_init(struct observer *observer)
 {
+#ifdef __linux__
 	memset(observer, sizeof(*observer), 0);
+#else
+	memset(observer, 0, sizeof(*observer));
+#endif
+
 	observer->ops = &observer_ops;
 }

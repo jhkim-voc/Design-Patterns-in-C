@@ -22,6 +22,11 @@
 
 void serializer_init(struct serializer *serializer)
 {
+#ifdef __linux__
 	memset(serializer, sizeof(*serializer), 0);
+#else
+	memset(serializer, 0, sizeof(*serializer));
+#endif
+
 }
 

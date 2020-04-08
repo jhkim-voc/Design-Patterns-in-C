@@ -42,7 +42,12 @@ static struct command_ops command_ops = {
 void flipup_init(struct flipup *flipup, struct light *light, int val)
 {
 	_MY_TRACE_STR("flipup_init()\n");
+#ifdef __linux__
 	memset(flipup, sizeof(*flipup), 0);
+#else
+	memset(flipup, 0, sizeof(*flipup));
+#endif
+
 	command_init(&flipup->command);
 	CLASS_OPS_INIT(flipup->command.ops, command_ops);
 	flipup->_light = light;

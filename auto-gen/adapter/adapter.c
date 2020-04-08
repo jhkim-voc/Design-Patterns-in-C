@@ -34,7 +34,12 @@ static struct target_ops target_ops = {
 
 void adapter_init(struct adapter *adapter, struct adaptee *adaptee)
 {
+#ifdef __linux__
 	memset(adapter, sizeof(*adapter), 0);
+#else
+	memset(adapter, 0, sizeof(*adapter));
+#endif
+
 	target_init(&adapter->target);
 	CLASS_OPS_INIT(adapter->target.ops, target_ops);
 	adapter->_adaptee = adaptee;

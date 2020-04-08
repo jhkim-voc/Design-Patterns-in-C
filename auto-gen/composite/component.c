@@ -29,6 +29,11 @@ static struct component_ops component_ops = {
 
 void component_init(struct component *component)
 {
+#ifdef __linux__
 	memset(component, sizeof(*component), 0);
+#else
+	memset(component, 0, sizeof(*component));
+#endif
+
 	component->ops = &component_ops;
 }

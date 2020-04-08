@@ -55,6 +55,11 @@ static struct M_ops M_ops = {
 /** constructor(). */
 void M_init(struct M *M)
 {
+#ifdef __linux__
 	memset(M, sizeof(*M), 0);
+#else
+	memset(M, 0, sizeof(*M));
+#endif
+
 	M->ops = &M_ops;
 }

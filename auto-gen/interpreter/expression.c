@@ -59,7 +59,12 @@ static struct operand_ops operand_ops = {
 void expression_init(struct expression *expression, char oper)
 {
 	_MY_TRACE_STR("expression_init()\n");
+#ifdef __linux__
 	memset(expression, sizeof(*expression), 0);
+#else
+	memset(expression, 0, sizeof(*expression));
+#endif
+
 	operand_init(&expression->operand);
 	CLASS_OPS_INIT(expression->operand.ops, operand_ops);
 	expression->_oper = oper;

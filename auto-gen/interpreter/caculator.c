@@ -31,7 +31,12 @@ STACK_IMPL(stack_op, struct operand *, 128);
 void caculator_init(struct caculator *caculator)
 {
 	_MY_TRACE_STR("caculator_init()\n");
+#ifdef __linux__
 	memset(caculator, sizeof(*caculator), 0);
+#else
+	memset(caculator, 0, sizeof(*caculator));
+#endif
+
 }
 
 /** return bool */

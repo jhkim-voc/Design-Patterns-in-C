@@ -46,7 +46,12 @@ static struct pizza_ops pizza_ops = {
 /** constructor(). */
 void jalapeno_topping_init(struct jalapeno_topping *jalapeno_topping, struct pizza *inner, int topping_price)
 {
+#ifdef __linux__
 	memset(jalapeno_topping, sizeof(*jalapeno_topping), 0);
+#else
+	memset(jalapeno_topping, 0, sizeof(*jalapeno_topping));
+#endif
+
 	toppings_decorator_init(&jalapeno_topping->toppings_decorator, inner, topping_price);
 	CLASS_OPS_INIT(jalapeno_topping->toppings_decorator.pizza.ops, pizza_ops);
 }

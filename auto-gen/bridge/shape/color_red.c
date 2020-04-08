@@ -32,7 +32,12 @@ static struct color_ops color_ops = {
 
 void color_red_init(struct color_red *color_red)
 {
+#ifdef __linux__
 	memset(color_red, sizeof(*color_red), 0);
+#else
+	memset(color_red, 0, sizeof(*color_red));
+#endif
+
 	color_init(&color_red->color);
 	CLASS_OPS_INIT(color_red->color.ops, color_ops);
 }
