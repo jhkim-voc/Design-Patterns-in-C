@@ -1,7 +1,9 @@
 #ifndef __MY_TRACE_H__
 #define __MY_TRACE_H__
 
+#ifdef __linux__
 #include <execinfo.h>	/* backtrace */
+#endif
 
 void _my_trace_backtrace_init(void);
 int  _my_trace_backtrace_indent(void);

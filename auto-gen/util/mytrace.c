@@ -14,8 +14,10 @@ static void* g_backtrace_local_stack[MY_TRACE_SIZE];
 /* call once in top function such as main_entry() */
 void _my_trace_backtrace_init(void)
 {
-    int addr_sz;
+    int addr_sz=4;
+#ifdef __linux__
     addr_sz = backtrace(g_backtrace_local_stack, 3);
+#endif
 
     assert(addr_sz >= 3);
     if (addr_sz < 3) {
@@ -33,11 +35,13 @@ void _my_trace_backtrace_init(void)
 int _my_trace_backtrace_indent(void)
 {
     /* bt at least 4, so offset is 3 from [0,1,2,3] */
-    int ii, jj, addr_sz, trace_sz=6, offset=3;
+    int ii, jj, addr_sz=4, trace_sz=6, offset=3;
     void *up_func = 0;
 
 increase_stack_sz:
+#ifdef __linux__
     addr_sz = backtrace(g_backtrace_local_stack, trace_sz);
+#endif
 
 try_upper:
     if (offset < addr_sz) {
